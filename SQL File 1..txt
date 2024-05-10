@@ -1,0 +1,48 @@
+-- Task 1
+-- DELETE FROM Students
+-- WHERE student_id NOT IN (SELECT student_id FROM Enrollments);
+-- SELECT * FROM Students;
+
+-- Task 2
+-- DELETE FROM Assignments
+-- WHERE is_done = false;
+-- SELECT * FROM Assignments;
+
+-- Task 3
+-- UPDATE Students
+-- SET email = CONCAT(last_name, '.', first_name, '@example.com');
+-- SELECT * FROM Students;
+
+-- Task 4
+-- SELECT student_id, AVG(is_done) AS average_completed
+-- FROM Assignments
+-- GROUP BY student_id;
+
+-- Task 5
+-- SELECT i.instructor_id, COUNT(e.student_id) AS total_students
+-- FROM Instructors i
+-- JOIN Courses c 
+-- ON i.instructor_id = c.instructor_id
+-- JOIN Enrollments e 
+-- ON c.course_id = e.course_id
+-- GROUP BY i.instructor_id;
+
+-- Task 6
+-- SELECT course_id, COUNT(assignment_id) AS total_assignments
+-- FROM Assignments
+-- WHERE is_done = true
+-- GROUP BY course_id
+-- ORDER BY total_assignments DESC
+-- LIMIT 1;
+
+-- Task 8
+-- SELECT c.course_id, c.course_name, AVG(a.is_done) as average_completion_rate
+-- FROM Courses c
+-- JOIN Assignments a ON c.course_id = a.course_id
+-- GROUP BY c.course_id, c.course_name
+-- ORDER BY average_completion_rate ASC
+-- LIMIT 1;
+
+
+
+

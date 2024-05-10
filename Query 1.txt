@@ -1,0 +1,90 @@
+use exam;
+DROP TABLE Assignments;
+DROP TABLE Enrollments;
+DROP TABLE Courses;
+DROP TABLE Instructors;
+DROP TABLE Students;
+
+SET SQL_SAFE_UPDATES=0;
+
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(50)
+);
+
+CREATE TABLE Instructors (
+    instructor_id INT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255),
+    phone_number VARCHAR(20)
+);
+
+
+CREATE TABLE Courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(255),
+    course_description TEXT,
+    start_date DATE,
+    end_date DATE,
+    instructor_id INT,
+    FOREIGN KEY (instructor_id) REFERENCES Instructors(instructor_id)
+);
+
+
+CREATE TABLE Enrollments (
+    enrollment_id INT PRIMARY KEY,
+    student_id INT,
+    course_id INT,
+    enrollment_date DATE,
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
+CREATE TABLE Assignments (
+    assignment_id INT PRIMARY KEY,
+    course_id INT,
+    student_id INT,
+    assignment_name VARCHAR(255),
+    assignment_description TEXT,
+    deadline DATETIME,
+    is_done bool,
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
+INSERT INTO Students (student_id, first_name, last_name, email, phone_number) 
+VALUES
+(4, 'Max', 'Kovalenko', 'max.kovalenko@example.com', '222-333-4444'),
+(5, 'Olga', 'Petrova', 'olga.petrova@example.com', '333-444-5555'),
+(6, 'Petro', 'Olegovich', 'petro.olegovich@example.com', '111-222-3333'),
+(7, 'Artur', 'Voitkiv', 'arthur.voitki@example.com', '111-222-3333');
+
+INSERT INTO Instructors (instructor_id, first_name, last_name, email, phone_number) 
+VALUES
+(3, 'Dr.', 'Green', 'dr.green@example.com', '777-888-9999'),
+(4, 'Professor', 'Black', 'professor.black@example.com', '888-999-0000');
+
+INSERT INTO Courses (course_id, course_name, course_description, start_date, end_date, instructor_id) 
+VALUES
+(3, 'Web Development', 'Learn the basics of web development', '2024-09-01', '2024-12-15', 3),
+(4, 'Advanced Mathematics', 'Understanding complex mathematical concepts', '2024-08-15', '2024-12-10', 4);
+
+INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) 
+VALUES
+(4, 4, 3, '2024-09-05'),
+(5, 5, 4, '2024-09-07'),
+(6, 7, 3, '2024-09-05');
+
+INSERT INTO Assignments (assignment_id, course_id, student_id, assignment_name, assignment_description, deadline, is_done) 
+VALUES
+(4, 3, 4, 'Website Project', 'Create a personal website using HTML, CSS, and JavaScript', '2024-09-30 23:59:59', true),
+(5, 4, 5, 'Calculus Paper', 'Write a paper on calculus theories', '2024-09-25 23:59:59', true),
+(6, 3, 6, 'Website Project', 'Create a personal website using HTML, CSS, and JavaScript', '2024-09-30 23:59:59', false),
+(7, 3, 7, 'Website Project', 'Create a personal website using HTML, CSS, and JavaScript', '2024-09-30 23:59:59', true);
+
+
+
+
